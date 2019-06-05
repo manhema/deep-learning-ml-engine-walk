@@ -7,7 +7,7 @@ CSV_COLUMNS = [
     'SepalLength', 'SepalWidth', 'PetalLength', 'PetalWidth', 'Species'
 ]
 
-CSV_COLUMN_DEFAULTS = [[0], [0], [0], [0], [0]]
+CSV_COLUMN_DEFAULTS = [[0.0], [0.0], [0.0], [0.0], [0]]
 
 LABEL_COLUMN = 'Species'
 

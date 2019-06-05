@@ -65,7 +65,7 @@ def _parse_label_column(label_string_tensor):
 def input_fn(filenames,
              num_epochs=None,
              shuffle=True,
-             skip_header_lines=0,
+             skip_header_lines=1,
              batch_size=200,
              num_parallel_calls=None,
              prefetch_buffer_size=None):
@@ -102,7 +102,10 @@ def input_fn(filenames,
     iterator = dataset.repeat(num_epochs).batch(
         batch_size).make_one_shot_iterator()
     features = iterator.get_next()
-    return features, _parse_label_column(features.pop(constants.LABEL_COLUMN))
+    # return features, _parse_label_column(features.pop(constants.LABEL_COLUMN))
+    print('\nfeatures', features, '\n')
+    # return features, features.pop(constants.LABEL_COLUMN)
+    return features, features[constants.LABEL_COLUMN]
 
 
 # ************************************************************************
