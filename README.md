@@ -29,3 +29,7 @@ gcloud ai-platform local train \
     --train-steps 1000 \
     --eval-steps 100
 ```
+
+```console
+tensorboard --logdir=$MODEL_DIR
+```
