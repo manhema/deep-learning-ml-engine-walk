@@ -13,3 +13,4 @@ LABEL_COLUMN = 'Species'
 
 # LABELS = ['Setosa', 'Versicolor', 'Virginica']
 LABELS = [0, 1, 2]
+# LABELS = ['0', '1', '2']

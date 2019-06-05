@@ -7,11 +7,11 @@ source cmle-env/bin/activate
 ```
 
 ```console
-TRAIN_DATA=$(pwd)/data/adult.data.csv
+TRAIN_DATA=$(pwd)/data/iris_training.csv
 ```
 
 ```console
-EVAL_DATA=$(pwd)/data/adult.test.csv
+EVAL_DATA=$(pwd)/data/iris_test.csv
 ```
 
 ```console
