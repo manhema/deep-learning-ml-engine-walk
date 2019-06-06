@@ -17,3 +17,7 @@ INPUT_COLUMNS = [
     # tf.feature_column.categorical_column_with_vocabulary_list(
     #     'Species', ['Setosa', 'Versicolor', 'Virginica']),
 ]
+
+
+def get_dnn_columns():
+    return INPUT_COLUMNS[:-1]

@@ -1,18 +1,3 @@
-# Copyright 2016 Google Inc. All Rights Reserved. Licensed under the Apache
-# License, Version 2.0 (the "License"); you may not use this file except in
-# compliance with the License. You may obtain a copy of the License at
-# http://www.apache.org/licenses/LICENSE-2.0
-
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
-# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
-# License for the specific language governing permissions and limitations under
-# the License.
-"""Defines a Wide + Deep model for classification on structured data.
-
-Tutorial on wide and deep: https://www.tensorflow.org/tutorials/wide_and_deep/
-"""
-
 import multiprocessing
 import tensorflow as tf
 
@@ -39,10 +24,12 @@ def _decode_csv(line):
 
     for col in unused_columns:
         features.pop(col)
+
     return features
 
 
 def _parse_label_column(label_string_tensor):
+    # NOTE: Not in use since species is feature/label is numerical
     """Parses a string tensor into the label tensor.
 
     Args:
@@ -103,9 +90,7 @@ def input_fn(filenames,
         batch_size).make_one_shot_iterator()
     features = iterator.get_next()
     # return features, _parse_label_column(features.pop(constants.LABEL_COLUMN))
-    print('\nfeatures', features, '\n')
-    # return features, features.pop(constants.LABEL_COLUMN)
-    return features, features[constants.LABEL_COLUMN]
+    return features, features.pop(constants.LABEL_COLUMN)
 
 
 # ************************************************************************

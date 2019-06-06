@@ -4,13 +4,17 @@ from __future__ import print_function
 
 import tensorflow as tf
 
+from constants import constants
+
 import trainer.featurizer as featurizer
 
 
 def build_estimator(config, hidden_units=None):
+    features = featurizer.get_dnn_columns()
     classifier = tf.estimator.DNNClassifier(
         config=config,
-        feature_columns=featurizer.INPUT_COLUMNS,
+        # All features except the LABEL
+        feature_columns=features,
         hidden_units=hidden_units or [10, 10],
         n_classes=3,
     )
