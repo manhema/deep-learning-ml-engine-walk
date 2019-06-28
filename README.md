@@ -2,6 +2,8 @@
 
 This tutorial introduces on how to train deep learning models on Google ML Engine _(now AI Platform)_ which is a tool developed by Google to make it easier to take ML projects from ideation to production.
 
+**Note**: This tutorial is an adaption of the [Getting Started Training Prediction](https://cloud.google.com/ml-engine/docs/tensorflow/getting-started-training-prediction) tutorial.
+
 #### What is deep learning?
 
 [Deep learning](https://en.wikipedia.org/wiki/Deep_learning) is a class of machine learning algorithms that: use multiple layers to progressively extract higher level features from raw input.
@@ -210,3 +212,64 @@ Use the default `BASIC` [scale tier](https://cloud.google.com/ml-engine/docs/ten
    ```
 
 You can monitor the progress of your training job by watching the command-line output or in AI Platform > Jobs on [Google Cloud Platform Console](https://console.cloud.google.com/mlengine/jobs?_ga=2.30907391.-191603348.1557563231&_gac=1.224851560.1560609624.Cj0KCQjwrpLoBRD_ARIsAJd0BIUJfEWlDGh6bNrvDH2UKP5XlBf20OuNWUZ8JLdQI_gZT4MUzqWhrPgaAijZEALw_wcB).
+
+#### Deploy a model to support prediction
+
+1. Choose a name for your model; this must start with a letter and contain only letters, numbers, and underscores. For example:
+
+   ```console
+   MODEL_NAME=iris
+   ```
+
+2. Create an AI Platform model:
+
+   ```console
+   gcloud ai-platform models create $MODEL_NAME --regions=$REGION
+
+   ```
+
+3. Select the job output to use. The following sample uses the job named iris_single_1.
+
+   ```console
+   OUTPUT_PATH=gs://$BUCKET_NAME/iris_single_1
+   ```
+
+4. Look up the full path of your exported trained model binaries:
+
+   ```console
+   gsutil ls -r $OUTPUT_PATH/export
+   ```
+
+5. Find a directory named `$OUTPUT_PATH/export/iris/<timestamp>` and copy this directory path (without the : at the end) and set the environment variable MODEL_BINARIES to its value. For example:
+
+   ```console
+   MODEL_BINARIES=gs://$BUCKET_NAME/census_dist_1/export/iris/1487877383942/
+   ```
+
+   Where `$BUCKET_NAME` is your Cloud Storage bucket name, and iris_single_1 is the output directory.
+
+6. Run the following command to create a version `v1`:
+
+   ```console
+   gcloud ai-platform versions create v1 \
+       --model $MODEL_NAME \
+       --origin $MODEL_BINARIES \
+       --runtime-version 1.10
+   ```
+
+You can get a list of your models using the models list command.
+
+```console
+gcloud ai-platform models list
+```
+
+#### Send an online prediction request to a deployed model
+
+You can now send prediction requests to your model. For example, the following command sends an online prediction request using a `test.json` file inside the `data` folder.
+
+```console
+gcloud ai-platform predict \
+    --model $MODEL_NAME \
+    --version v1 \
+    --json-instances data/test.json
+```
