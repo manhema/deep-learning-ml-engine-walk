@@ -28,54 +28,81 @@ Complete the following steps to set up a GCP account, activate the AI Platform A
 
 ## Training locally
 
-```console
-virtualenv cmle-env --python=python2.7
+#### Create a virtual environment
 
-source cmle-env/bin/activate
-```
+1. Install virtualenv
+   `virtualenv` is a tool to create isolated Python environments. Check if you already have `virtualenv` installed by running `virtualenv --version`.
 
-```console
-TRAIN_DATA=$(pwd)/data/iris_training.csv
-```
+   ```console
+   pip install --user --upgrade virtualenv
+   ```
 
-```console
-EVAL_DATA=$(pwd)/data/iris_test.csv
-```
+   To create an isolated development environment for this guide, create a new virtual environment in virtualenv. For example, the following command activates an environment named `cmle-env`:
 
-```console
-pip install -r ../requirements.txt
-```
+   ```console
+   virtualenv cmle-env --python=python2.7
+   source cmle-env/bin/activate
+   ```
 
-```console
-MODEL_DIR=output
-```
+2. For the purposes of this tutorial, run the rest of the commands within your virtual environment.
 
-```console
-rm -rf $MODEL_DIR/*
-```
+#### Get your training data
 
-```console
-gcloud ai-platform local train \
-    --module-name trainer.task \
-    --package-path trainer/ \
-    --job-dir $MODEL_DIR \
-    -- \
-    --train-files $TRAIN_DATA \
-    --eval-files $EVAL_DATA \
-    --train-steps 1000 \
-    --eval-steps 100
-```
+The relevant data files for training, `iris_training.csv` and `iris_test.csv`, are stored in the `data` folder.
 
-- Launch TensorBoard:
+1. Set the `TRAIN_DATA` AND `EVAL_DATA` variables to your local file paths. For example, the following commands set the variables to local paths.
 
-```console
-tensorboard --logdir=$MODEL_DIR
-```
+   ```console
+   TRAIN_DATA=$(pwd)/data/iris_training.csv
+   EVAL_DATA=$(pwd)/data/iris_test.csv
+   ```
 
-- When you have started running TensorBoard, you can access it in your browser at http://localhost:6006
+2. Install dependencies
 
-Click on **Accuracy** to see graphical representations of how accuracy changes as your job progresses.
-![alt text](imgs/tensorboard.png "Logo Title Text 1")
+   ```console
+   pip install -r ../requirements.txt
+   ```
+
+#### Run a local training job
+
+A local training job loads your Python training program and starts a training process in an environment that's similar to that of a live AI Platform cloud training job.
+
+1. Specify an output directory and set a `MODEL_DIR` variable. The following command sets `MODEL_DIR` to a value of output.
+
+   ```console
+   MODEL_DIR=output
+   ```
+
+2. It's a good practice to delete the contents of the output directory in case data remains from a previous training run. The following command deletes all data in the output directory.
+
+   ```console
+   rm -rf $MODEL_DIR/*
+   ```
+
+3. To run your training locally, run the following command:
+
+   ```console
+   gcloud ai-platform local train \
+       --module-name trainer.task \
+       --package-path trainer/ \
+       --job-dir $MODEL_DIR \
+       -- \
+       --train-files $TRAIN_DATA \
+       --eval-files $EVAL_DATA \
+       --train-steps 1000 \
+       --eval-steps 100
+   ```
+
+4. Inspect the summary logs using Tensorboard
+
+   ```console
+   tensorboard --logdir=$MODEL_DIR
+   ```
+
+   When you have started running TensorBoard, you can access it in your browser at http://localhost:6006
+
+   Click on **Accuracy** to see graphical representations of how accuracy changes as your job progresses.
+   ![alt text](imgs/tensorboard.png "Logo Title Text 1")
 
 ## Training in the cloud
 
