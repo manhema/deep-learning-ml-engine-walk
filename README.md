@@ -1,4 +1,30 @@
-# Deep Learning Cloud ML Engine Walk Through
+# Deep Learning on Google ML Engine _(AI Platform)_
+
+This tutorial introduces on how to train deep learning models on Google ML Engine _(now AI Platform)_ which is a tool developed by Google to make it easier to take ML projects from ideation to production.
+
+#### What is deep learning?
+
+[Deep learning](https://en.wikipedia.org/wiki/Deep_learning) is a class of machine learning algorithms that: use multiple layers to progressively extract higher level features from raw input.
+
+#### Overview
+
+The main focus of this tutorial is on how to train a deep learning model on Google's **AI Platform** and less on how to develop a deep learning model & the science behind that.
+
+In this tutorial we are going to make use of the [Iris flower data set](https://en.wikipedia.org/wiki/Iris_flower_data_set) to train a [deep neural network](https://en.wikipedia.org/wiki/Deep_learning#Deep_neural_networks) and classify different flower species. We are going to use the [DNNClassifier tensorflow estimator](https://www.tensorflow.org/api_docs/python/tf/estimator/DNNClassifier) to train the model and parkage it as an application to be deployed on AI platform.
+
+## Setting up and testing your Cloud environment
+
+Complete the following steps to set up a GCP account, activate the AI Platform API, and install and activate the Cloud SDK.
+
+### Set up your GCP project
+
+1. Select or create a Google Cloud Platform project. [Go To The Manager Resources Page](https://console.cloud.google.com/cloud-resource-manager?_ga=2.76460885.-191603348.1557563231&_gac=1.225252840.1560609624.Cj0KCQjwrpLoBRD_ARIsAJd0BIUJfEWlDGh6bNrvDH2UKP5XlBf20OuNWUZ8JLdQI_gZT4MUzqWhrPgaAijZEALw_wcB)
+
+2. Make sure that billing is enabled for your Google Cloud Platform project. [Learn How To Enable Billing](https://cloud.google.com/billing/docs/how-to/modify-project)
+
+3. Enable the AI Platform ("Cloud Machine Learning Engine") and Compute Engine APIs. [Enable The APIs](https://console.cloud.google.com/flows/enableapi?apiid=ml.googleapis.com,compute_component&_ga=2.76455765.-191603348.1557563231&_gac=1.254719482.1560609624.Cj0KCQjwrpLoBRD_ARIsAJd0BIUJfEWlDGh6bNrvDH2UKP5XlBf20OuNWUZ8JLdQI_gZT4MUzqWhrPgaAijZEALw_wcB)
+
+4. [Install and initialize the Cloud SDK](https://cloud.google.com/sdk/docs/).
 
 ## Training locally
 
