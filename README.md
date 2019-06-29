@@ -1,12 +1,18 @@
 # Deep Learning on Google ML Engine _(AI Platform)_
 
-This tutorial introduces on how to train deep learning models on Google ML Engine _(now AI Platform)_ which is a tool developed by Google to make it easier to take ML projects from ideation to production.
+This tutorial is an introduces on how to train deep learning models on Google ML Engine (now AI Platform). This is  a tool developed by Google to make it easier to take ML projects from ideation to production. 
 
 **Note**: This tutorial is an adaption of the [Getting Started Training Prediction](https://cloud.google.com/ml-engine/docs/tensorflow/getting-started-training-prediction) tutorial.
+
+#### A bit of background on Machine Learning
+
+Machine learning is essentially what the term suggests -  the learning of machines, particularly, computer systems. Machine learning enables computer systems to learn from examples in order to predict outcomes without being explicitly programmed by humans. Oftentimes large data sets are required to accurately train the computer system; therefore a great amount of force is needed by the neural networks. This limitation can be solved by the application of deep learning. 
 
 #### What is deep learning?
 
 [Deep learning](https://en.wikipedia.org/wiki/Deep_learning) is a class of machine learning algorithms that: use multiple layers to progressively extract higher level features from raw input.
+
+In esssence deep learning is achieved by training computer systems to learn algorithms by the use of neural networks; these neural networks mimic the biological neurons of the human brain. The neural networks are based on a set of multiple layers which are connected to each other; the main function of these neural networks is to use inputted data to accurately predict outputs using progressively complex calculations. 
 
 #### Overview
 
